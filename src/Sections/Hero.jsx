@@ -13,24 +13,26 @@ const Hero = () => {
       id="home"
       className="w-full flex xl:flex-row flex-col justify-center min-h-screen gap-10 max-container"
     >
-      <div className="relative xl:w-2/5 flex flex-col justify-center items-start w-full max-xl:padding-x pt-28">
+      <div className="relative xl:w-2/5 flex flex-col justify-center items-start w-full px-4 md:px-8 lg:px-10 xl:px-12 sm:px-6 pt-28">
         <p className="text-xl font-montserrat text-coral-red">
           Our Collections
         </p>
-        <h1 className="mt-10 font-palanquin text-8xl max-sm:text-[72px] max-sm:leading-[82] font-bold">
-          <span className="xl:bg-white xl:whitespace-nowrap relative z-10 pr-10">
+        <h1 className="mt-10 font-palanquin text-8xl sm:text-[72px] sm:leading-[82px] font-bold max-sm:text-4xl">
+          <span className="xl:bg-white xl:whitespace-nowrap relative z-10 pr-10 max-sm:text-4xl">
             The New Arrivals
           </span>
           <br />
-          <span className="text-coral-red inline-block mt-3">Nike</span>
-          <span>{/*This is a pace created */} </span>Shoes
+          <span className="text-coral-red inline-block mt-3 max-sm:text-4xl">
+            Nike <span> </span>
+          </span>{" "}
+          Shoes
         </h1>
-        <p className="font-montserrat text-slate-gray text-lg leading-8 mt-6 mb-14 sm:max-w-sm">
+        <p className="font-montserrat text-slate-gray text-lg leading-8 mt-6 mb-14 sm:max-w-sm max-sm:text-3xl">
           Discover stylish Nike Arrivals, Quality comfort and innovation for
           your active life.
         </p>
         <Button label="Shop now" iconUrl={arrowRight} />
-        <div className="flex justify-start items-start flex-wrap w-full mt-20 gap-16">
+        <div className="flex justify-start items-start flex-wrap w-full mt-20 gap-8 sm:gap-16">
           {statistics.map((stat, index) => (
             <div key={index}>
               <p className="text-4xl font-palanquin font-bold">{stat.value}</p>
@@ -41,20 +43,20 @@ const Hero = () => {
           ))}
         </div>
       </div>
-      <div className="relative flex-1 justify-center items-center xl:min-h-screen max-xl:py-50 bg-primary bg-hero bg-cover ">
+      <div className="relative flex-1 flex justify-center items-center xl:min-h-screen bg-hero bg-cover">
         <img
-          src={bigShoe1}
+          src={bigShoe1} // Updated to use state variable
           alt="shoe collection"
-          width={610}
-          height={500}
-          className="object-contain relative z-10 xl:ml-20 xl:mt-20"
+          width={500}
+          height={400}
+          className="object-contain relative z-10 max-sm:mb-40 mb-20"
         />
-        <div className="flex sm:gap-5 absolute -bottom-[0%] sm:left-[10%] sm:px-6">
-          {shoes.map((shoe) => (
-            <div key={shoe}>
+        <div className="flex gap-5 max-sm:gap-2 absolute bottom-0 sm:left-[7%] mt-10">
+          {shoes.map((shoe, index) => (
+            <div key={index}>
               <ShoeCard
                 imgUrl={shoe}
-                changeBigShoeImage={(shoe) => setbigShoeImg(shoe)}
+                changeBigShoeImage={setbigShoeImg}
                 bigShoeImg={bigShoeImg}
               />
             </div>
