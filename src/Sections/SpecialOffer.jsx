@@ -4,13 +4,13 @@ import Button from "../Components/Button";
 const SpecialOffer = () => {
   return (
     <section className="flex justify-wrap items-center max-xl:flex-col-reverse gap-10 max-container">
-      <div className="flex-1">
+      <div className="flex-1 mt-10">
         <img
           src={offer}
           alt="shoes"
           height={687}
           width={773}
-          className="object-contain w-full"
+          className="object-contain w-full hover:scale-125"
         />
       </div>
       <div className="relative xl:w-2/5 flex flex-col justify-center items-start w-full max-xl:padding-x pt-28">

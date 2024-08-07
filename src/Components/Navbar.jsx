@@ -8,7 +8,7 @@ const Navbar = () => {
     <header className="padding-x py-8 w-full absolute z-10">
       <nav className="flex justify-between items-center max-container">
         <a>
-          <img src={headerLogo} alt="Logo" width={130} height={29} />
+          <img src={headerLogo} alt="Logo" width={130} height={39} />
         </a>
         <ul className="flex-1 flex justify-center items-center gap-16">
           {NavLinks.map((item, index) => (
@@ -23,7 +23,7 @@ const Navbar = () => {
           ))}
         </ul>
         <div className="hidden max-lg:block">
-          <img src={hamburger} alt="Harmburger" width={25} height={25} />
+          <img src={hamburger} alt="Harmburger" width={35} height={35} />
         </div>
       </nav>
     </header>

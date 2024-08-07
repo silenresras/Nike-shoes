@@ -49,7 +49,7 @@ const Hero = () => {
           alt="shoe collection"
           width={500}
           height={400}
-          className="object-contain relative z-10 max-sm:mb-40 mb-20"
+          className="object-contain relative z-10 max-sm:mb-40 mb-20 sm:mb-40 md:mb-40"
         />
         <div className="flex gap-5 max-sm:gap-2 absolute bottom-0 sm:left-[7%] mt-10">
           {shoes.map((shoe, index) => (

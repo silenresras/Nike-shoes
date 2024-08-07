@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="max-container">
       <div className="flex justify-between items-start gap-20 flex-wrap sm:flex-col">
-        <div className="flex sm:flex-col sm:items-start items-center">
+        <div className="flex flex-col items-start">
           <a href="/">
             <img
               src={footerLogo}
@@ -22,7 +22,7 @@ const Footer = () => {
           </p>
           <div className="flex items-center gap-5 mt-8 text-white rounded-full">
             {socialMedia.map((icon) => (
-              <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full">
+              <div className="flex justify-center items-center w-12 h-12 bg-white rounded-full hover:scale-125">
                 <img
                   src={icon.src}
                   alt={icon.alt}

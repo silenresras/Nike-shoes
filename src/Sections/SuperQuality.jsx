@@ -33,7 +33,7 @@ const SuperQuality = () => {
           alt="shoe"
           width={350}
           height={340}
-          className="object-contain"
+          className="object-contain hover:scale-125"
         />
       </div>
     </section>
