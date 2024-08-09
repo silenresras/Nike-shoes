@@ -2,9 +2,9 @@ import {bigShoe1, bigShoe2, bigShoe3, thumbnailShoe1, thumbnailShoe2, thumbnailS
 import { truckFast, shieldTick, support, facebook, twitter, instagram } from '../assets1/icons';
 import { customer1, customer2 } from '../assets1/images';
 export const NavLinks = [
-    {href: "#", label: "Home"},
-    {href: "#", label: "About Us"},
-    {href: "#", label: "Products"},
+    {href: "#Home", label: "Home"},
+    {href: "#About-us", label: "About Us"},
+    {href: "#Products", label: "Products"},
     {href: "#", label: "Contact Us"},
     {href: "#", label: "Cart"}
 ];     

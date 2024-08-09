@@ -5,7 +5,7 @@ import { arrowRight } from "../assets1/icons";
 const SuperQuality = () => {
   return (
     <section
-      id="about-us"
+      id="About-us"
       className="flex justify-between items-center max-lg:flex-col gap-10 w-full max-container"
     >
       <div className="relative xl:w-2/5 flex flex-col justify-center items-start w-full max-xl:padding-x pt-28">
@@ -21,7 +21,7 @@ const SuperQuality = () => {
           quality, innovation, and touch of elegance
         </p>
         <p className="mt-6 lg:max-w-lg info-text">
-          Our dedication to detail ensures your satisfactio
+          Our dedication to detail ensures your satisfaction
         </p>
         <div className="mt-11 flex flex-wrap gap-4">
           <Button label="Shop Now" iconUrl={arrowRight} />
