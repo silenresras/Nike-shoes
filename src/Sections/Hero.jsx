@@ -9,10 +9,7 @@ import ShoeCard from "../Components/ShoeCard";
 const Hero = () => {
   const [bigShoeImg, setbigShoeImg] = useState(bigShoe1);
   return (
-    <section
-      id="Home"
-      className="w-full flex xl:flex-row flex-col justify-center min-h-screen gap-10 max-container"
-    >
+    <section className="w-full flex xl:flex-row flex-col justify-center min-h-screen gap-10 max-container">
       <div className="relative xl:w-2/5 flex flex-col justify-center items-start w-full px-4 md:px-8 lg:px-10 xl:px-12 sm:px-6 pt-28">
         <p className="text-xl font-montserrat text-coral-red">
           Our Collections
@@ -45,7 +42,7 @@ const Hero = () => {
       </div>
       <div className="relative flex-1 flex justify-center items-center xl:min-h-screen bg-primary bg-hero bg-cover">
         <img
-          src={bigShoe1} // Updated to use state variable
+          src={bigShoe1}
           alt="shoe collection"
           width={500}
           height={400}

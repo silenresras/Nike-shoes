@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { headerLogo } from "../assets1/images";
 import { hamburger } from "../assets1/icons";
 import { NavLinks } from "../Constants/index.js";
-
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
@@ -17,7 +16,7 @@ const Navbar = () => {
           <img src={headerLogo} alt="Logo" width={130} height={39} />
         </a>
         {/* NavLinks for large screens */}
-        <ul className="hidden lg:flex flex-1 justify-center items-center gap-16">
+        <ul className="hidden lg:flex lg:text-sm lg:gap-5 flex-1 justify-center items-center gap-16">
           {NavLinks.map((item, index) => (
             <li key={index}>
               <a

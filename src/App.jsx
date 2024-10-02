@@ -1,45 +1,21 @@
 import React from "react";
-import {
-  Footer,
-  Hero,
-  PopularProducts,
-  Services,
-  SpecialOffer,
-  Subscribe,
-  CustomerReviews,
-  SuperQuality,
-} from "./Sections";
-import Navbar from "./Components/Navbar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+import MainRoute from "./route/MainRoute";
 
 const App = () => {
   return (
-    <main className="relative">
-      <Navbar />
-      <section className="xl:padding-1 wide:padding-r padding-b">
-        <Hero />
-      </section>
-      <section className="padding">
-        <PopularProducts />
-      </section>
-      <section>
-        <SuperQuality />
-      </section>
-      <section className="padding-x py-10">
-        <Services />
-      </section>
-      <section className="padding">
-        <SpecialOffer />
-      </section>
-      <section className="bg-pale-blue padding">
-        <CustomerReviews />
-      </section>
-      <section className="padding-x sm:py-32 py-16 w-full">
-        <Subscribe />
-      </section>
-      <section className="padding-x padding-t pb-8 bg-black">
-        <Footer />
-      </section>
-    </main>
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainRoute />} />
+
+        {/*other pages */}
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
   );
 };
 

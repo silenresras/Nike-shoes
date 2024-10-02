@@ -20,10 +20,10 @@ const Subscribe = () => {
       setMessage("Please enter a valid email address.");
     }
 
-    // Clear the message after 3 seconds
+    // Clear the message after 7 seconds
     setTimeout(() => {
       setMessage("");
-    }, 3000); // 3000ms = 3 seconds
+    }, 7000); // 7000ms = 7 seconds
   };
 
   return (

@@ -6,7 +6,8 @@ const Button = ({
   backgroundColor,
   textColor,
   borderColor,
-  onClick, // Add the onClick prop
+  onClick,
+  type,
 }) => {
   return (
     <button
@@ -16,7 +17,8 @@ const Button = ({
             ? `${backgroundColor} ${textColor} ${borderColor} hover:bg-gray-300`
             : "bg-coral-red text-white border-coral-red hover:bg-red-500"
         } rounded-full w-full`}
-      onClick={onClick} // Attach the onClick handler here
+      onClick={onClick}
+      type={type}
     >
       {label}
 
