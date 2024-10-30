@@ -3,15 +3,24 @@ import { Mail, User } from "lucide-react";
 
 import Input from "../Components/Input";
 import Button from "../Components/Button";
+import { useAuthStore } from "../Components/Store/AuthStore";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const { signup, error } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Send login request to server with email and password
+
+    try {
+      await signup(name, email, password);
+      navigate("/verify-email");
+    } catch (error) {}
   };
 
   return (
@@ -40,8 +49,24 @@ const SignUp = () => {
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
+
+            {error && (
+              <p className="text-red-500 font-semibold mt-2">{error}</p>
+            )}
+
             <Button label="submit" type="submit" onClick={handleSubmit} />
           </form>
+        </div>
+        <div className="px-8 py-4 bg-slate-300 bg-opacity-50 flex justify-center font-semibold">
+          <p className="text-sm text-red-500">
+            Already Have an Account?{" "}
+            <Link
+              to="/login"
+              className="text-green-400 hover:underline font-bold"
+            >
+              Sign In
+            </Link>
+          </p>
         </div>
       </div>
     </div>

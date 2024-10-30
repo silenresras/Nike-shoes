@@ -3,14 +3,25 @@ import React, { useState } from "react";
 
 import Button from "../Components/Button";
 import Input from "../Components/Input";
+import { useAuthStore } from "../Components/Store/AuthStore";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const { login, error } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Send login request to server with email and password
+
+    try {
+      await login(email, password);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -33,8 +44,32 @@ const Login = () => {
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
+            {error && (
+              <p className="text-red-500 font-semibold mt-2">{error}</p>
+            )}
+
+            <div className="flex items-center mb-2 pl-5">
+              <Link
+                to="/forgot-password"
+                className="text-sm text-red-500 hover:underline font-semibold"
+              >
+                Forgot Password?
+              </Link>
+            </div>
             <Button label="submit" type="submit" onClick={handleSubmit} />
           </form>
+        </div>
+
+        <div className="px-8 py-4 bg-slate-300 bg-opacity-50 flex justify-center font-semibold">
+          <p className="text-sm text-red-500">
+            Don't Have an Account?{" "}
+            <Link
+              to="/signup"
+              className="text-green-400 hover:underline font-bold"
+            >
+              Sign Up
+            </Link>
+          </p>
         </div>
       </div>
     </div>

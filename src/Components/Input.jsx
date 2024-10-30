@@ -9,7 +9,7 @@ const Input = ({ icon: Icon, ...props }) => {
       <input
         {...props}
         className="w-full pl-10 pr-3 py-2 bg-white bg-opacity-50 rounded-lg border border-white-700
-    focus:border-red-500 focus:ring-red-500 text-gray-500 placeholder-gray-400 transition duration-200"
+     text-gray-500 placeholder-gray-500 transition duration-200 focus:none focus:outline-none"
       />
     </div>
   );
