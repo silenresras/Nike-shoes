@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Input from "../Components/Input";
 import Button from "../Components/Button";
-import { Mail } from "lucide-react";
+import { Loader, Mail } from "lucide-react";
 import { useAuthStore } from "../Components/Store/AuthStore";
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const { forgotPassword } = useAuthStore();
+  const { forgotPassword, isLoading } = useAuthStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +30,13 @@ const ForgotPasswordPage = () => {
                 placeholder="Email address"
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <Button label="submit" type="submit" onClick={handleSubmit} />
+              <Button
+                label="submit"
+                type="submit"
+                onClick={handleSubmit}
+                isLoading={isLoading}
+                loader={Loader}
+              />
             </form>
           ) : (
             <div className="text-center">

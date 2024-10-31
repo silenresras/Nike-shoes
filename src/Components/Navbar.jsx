@@ -1,12 +1,26 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { headerLogo } from "../assets1/images";
 import { hamburger } from "../assets1/icons";
 import { NavLinks } from "../Constants/index.js";
+import { useAuthStore } from "../Components/Store/AuthStore";
+
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const { logout } = useAuthStore();
+  const navigate = useNavigate();
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
   return (
@@ -27,6 +41,14 @@ const Navbar = () => {
               </a>
             </li>
           ))}
+          <li>
+            <button
+              onClick={handleLogout}
+              className="font-montserrat text-lg font-bold text-slate-400 hover:text-slate-300"
+            >
+              Logout
+            </button>
+          </li>
         </ul>
         {/* Hamburger icon for small screens */}
         <div className="lg:hidden block" onClick={toggleNav}>
@@ -45,6 +67,14 @@ const Navbar = () => {
                 </a>
               </li>
             ))}
+            <li className="w-full mt-4">
+              <button
+                onClick={handleLogout}
+                className="font-montserrat font-bold text-slate-400 hover:text-slate-300"
+              >
+                Logout
+              </button>
+            </li>
           </ul>
         )}
       </nav>

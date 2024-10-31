@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../Components/Input";
 import Button from "../Components/Button";
-import { User } from "lucide-react";
+import { Loader, User } from "lucide-react";
 import { useAuthStore } from "../Components/Store/AuthStore";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -10,7 +10,7 @@ const ResetPasswordPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { resetPassword, error, message } = useAuthStore();
+  const { resetPassword, error, message, isLoading } = useAuthStore();
 
   const { token } = useParams();
   const navigate = useNavigate();
@@ -63,7 +63,13 @@ const ResetPasswordPage = () => {
               <p className="text-green-500 text-sm mb-4">{message}</p>
             )}
 
-            <Button label="submit" type="submit" onClick={handleSubmit} />
+            <Button
+              label="submit"
+              type="submit"
+              onClick={handleSubmit}
+              isLoading={isLoading}
+              loader={Loader}
+            />
           </form>
         </div>
       </div>

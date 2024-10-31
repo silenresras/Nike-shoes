@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, User } from "lucide-react";
+import { Loader, Mail, User } from "lucide-react";
 
 import Input from "../Components/Input";
 import Button from "../Components/Button";
@@ -11,7 +11,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signup, error } = useAuthStore();
+  const { signup, error, isLoading } = useAuthStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -54,7 +54,13 @@ const SignUp = () => {
               <p className="text-red-500 font-semibold mt-2">{error}</p>
             )}
 
-            <Button label="submit" type="submit" onClick={handleSubmit} />
+            <Button
+              label="submit"
+              type="submit"
+              onClick={handleSubmit}
+              isLoading={isLoading}
+              loader={Loader}
+            />
           </form>
         </div>
         <div className="px-8 py-4 bg-slate-300 bg-opacity-50 flex justify-center font-semibold">

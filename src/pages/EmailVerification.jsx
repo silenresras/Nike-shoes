@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuthStore } from "../Components/Store/AuthStore";
 import Button from "../Components/Button";
+import { Loader } from "lucide-react";
 
 const EmailVerification = () => {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef([]);
   const navigate = useNavigate();
 
-  const { error, verifyEmail } = useAuthStore();
+  const { error, verifyEmail, isLoading } = useAuthStore();
 
   const handleChange = (index, value) => {
     const newCode = [...code];
@@ -87,7 +88,12 @@ const EmailVerification = () => {
             ))}
           </div>
           {error && <p className="text-red-500 font-semibold">{error}</p>}
-          <Button type="submit" label="Verify Email" />
+          <Button
+            type="submit"
+            label="Verify Email"
+            isLoading={isLoading}
+            loader={Loader}
+          />
         </form>
       </div>
     </div>

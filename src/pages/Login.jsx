@@ -1,4 +1,4 @@
-import { Mail, User } from "lucide-react";
+import { Loader, Mail, User } from "lucide-react";
 import React, { useState } from "react";
 
 import Button from "../Components/Button";
@@ -10,7 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login, error } = useAuthStore();
+  const { login, error, isLoading } = useAuthStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -56,7 +56,13 @@ const Login = () => {
                 Forgot Password?
               </Link>
             </div>
-            <Button label="submit" type="submit" onClick={handleSubmit} />
+            <Button
+              label="submit"
+              type="submit"
+              onClick={handleSubmit}
+              isLoading={isLoading}
+              loader={Loader}
+            />
           </form>
         </div>
 
