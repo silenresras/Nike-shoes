@@ -1,5 +1,5 @@
 import { Loader, Mail, User } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Button from "../Components/Button";
 import Input from "../Components/Input";
@@ -10,11 +10,17 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login, error, isLoading } = useAuthStore();
+  const { login, error, isLoading, clearError  } = useAuthStore();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    clearError()
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    clearError()
 
     try {
       await login(email, password);

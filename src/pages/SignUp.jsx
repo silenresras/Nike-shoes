@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Loader, Mail, User } from "lucide-react";
 
 import Input from "../Components/Input";
@@ -11,11 +11,19 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signup, error, isLoading } = useAuthStore();
+  
+  const { signup, error, isLoading, clearError} = useAuthStore();
   const navigate = useNavigate();
+
+    useEffect(() => {
+    clearError()
+  }, []);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    clearError();
 
     try {
       await signup(name, email, password);
