@@ -5,108 +5,38 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import MainRoute from "./route/MainRoute";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import EmailVerification from "./pages/EmailVerification";
-import { useAuthStore } from "./Components/Store/AuthStore";
-
-const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, user } = useAuthStore();
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
-
-  if (!user.isVerified) {
-    return <Navigate to="/verify-email" replace />;
-  }
-
-  return children;
-};
-
-const RedirectAuthenticatedUsers = ({ children }) => {
-  const { isAuthenticated, user } = useAuthStore();
-
-  if (isAuthenticated && user.isVerified) {
-    return <Navigate to="/" replace />;
-  }
-
-  return children;
-};
+import { useAuthStore } from "./Components/Store/AuthStore"; // assuming this is where your store is defined
 
 const App = () => {
-  const { checkAuth } = useAuthStore();
+  const { checkAuth, isCheckingAuth, isAuthenticated, user } = useAuthStore(); // Assuming you have a method to check authentication
 
   useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+    checkAuth(); // Trigger on page load/reload to check if the user is authenticated
+  }, []);
+
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <MainRoute />
-            </ProtectedRoute>
-          }
-        />
+        {/* Publicly accessible homepage */}
+        <Route path="/" element={<MainRoute />} />
 
-        {/*other pages */}
-        <Route
-          path="/signup"
-          element={
-            <RedirectAuthenticatedUsers>
-              <SignUp />
-            </RedirectAuthenticatedUsers>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <RedirectAuthenticatedUsers>
-              <Login />
-            </RedirectAuthenticatedUsers>
-          }
-        />
-        <Route
-          path="/verify-email"
-          element={
-            <RedirectAuthenticatedUsers>
-              <EmailVerification />
-            </RedirectAuthenticatedUsers>
-          }
-        />
-        <Route
-          path="/forgot-password"
-          element={
-            <RedirectAuthenticatedUsers>
-              <ForgotPasswordPage />
-            </RedirectAuthenticatedUsers>
-          }
-        />
-        <Route
-          path="/reset-password"
-          element={
-            <RedirectAuthenticatedUsers>
-              <ResetPasswordPage />
-            </RedirectAuthenticatedUsers>
-          }
-        />
+        {/* Authentication-related routes */}
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/verify-email" element={<EmailVerification />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
-        <Route
-          path="/reset-password/:token"
-          element={
-            <RedirectAuthenticatedUsers>
-              <ResetPasswordPage />
-            </RedirectAuthenticatedUsers>
-          }
-        />
-        {/*catch all routes */}
+        {/* Protected Routes */}
+
+        {/* Catch-all route */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
