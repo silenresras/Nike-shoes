@@ -19,10 +19,20 @@ export const useAuthStore = create((set) => ({
             const response = await axios.post(`${API_URL}/signup`, { name, email, password });
             set({ user: response.data.user, isAuthenticated: true, isLoading: false })
 
-            localStorage.setItem("authToken",);
+            localStorage.setItem("authToken", response.data.token);
         } catch (error) {
-            set({ isLoading: false, error: error.response.data.message || "Error Signing up" });
-            throw error
+            set({ isLoading: false });
+
+            if (error.response) {
+                console.error("Error response:", error.response);
+                set({ error: error.response.data.message || "Error Signing up" });
+            } else if (error.request) {
+                set({ error: "No response from server. Please try again later." });
+            } else {
+                set({ error: error.message || "An error occurred during sign up" });
+            }
+
+            throw error;
         }
     },
 

@@ -10,17 +10,17 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login, error, isLoading, clearError  } = useAuthStore();
+  const { login, error, isLoading, clearError } = useAuthStore();
   const navigate = useNavigate();
 
   useEffect(() => {
-    clearError()
+    clearError();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    clearError()
+    clearError();
 
     try {
       await login(email, password);

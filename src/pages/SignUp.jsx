@@ -11,14 +11,12 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  
-  const { signup, error, isLoading, clearError} = useAuthStore();
+  const { signup, error, isLoading, clearError } = useAuthStore();
   const navigate = useNavigate();
 
-    useEffect(() => {
-    clearError()
+  useEffect(() => {
+    clearError();
   }, []);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,8 +25,13 @@ const SignUp = () => {
 
     try {
       await signup(name, email, password);
-      navigate("/verify-email");
-    } catch (error) {}
+      console.log("Signup successful! Redirecting to verify-email...");
+      setTimeout(() => {
+        navigate("/verify-email");
+      }, 100); // Small delay before navigating
+    } catch (error) {
+      console.error("signup failed: ", error);
+    }
   };
 
   return (
