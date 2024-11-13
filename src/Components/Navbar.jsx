@@ -126,7 +126,7 @@ const Navbar = () => {
                   textColor="text-white"
                 />
               ) : (
-                <div className="flex gap-2">
+                <div className="w-full justify-between space-y-4">
                   <Button
                     label="Login"
                     onClick={() => navigate("/login")}
