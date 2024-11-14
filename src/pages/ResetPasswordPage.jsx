@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../Components/Input";
 import Button from "../Components/Button";
-import { Loader, User } from "lucide-react";
+import { EyeIcon, EyeOffIcon, Loader, User } from "lucide-react";
 import { useAuthStore } from "../Components/Store/AuthStore";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 const ResetPasswordPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [visible, setVisible] = useState(false);
 
   const { resetPassword, error, message, isLoading } = useAuthStore();
 
@@ -43,18 +44,34 @@ const ResetPasswordPage = () => {
             Reset Password
           </h2>
           <form>
-            <Input
-              icon={User}
-              type="password"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Input
-              icon={User}
-              type="password"
-              placeholder="Confirm Password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+            <div className="relative mb-3">
+              <Input
+                icon={User}
+                type={visible ? "text" : "password"}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <div
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-slate-400 font-bold"
+                onClick={() => setVisible(!visible)}
+              >
+                {visible ? <EyeIcon /> : <EyeOffIcon />}
+              </div>
+            </div>
+            <div className="relative mb-3">
+              <Input
+                icon={User}
+                type={visible ? "text" : "password"}
+                placeholder="Confirm Password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <div
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-slate-400 font-bold"
+                onClick={() => setVisible(!visible)}
+              >
+                {visible ? <EyeIcon /> : <EyeOffIcon />}
+              </div>
+            </div>
 
             {error && (
               <p className="text-red-500 font-semibold mt-2">{error}</p>

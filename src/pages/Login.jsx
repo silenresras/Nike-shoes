@@ -1,4 +1,4 @@
-import { Loader, Mail, User } from "lucide-react";
+import { EyeIcon, EyeOffIcon, Loader, Mail, User } from "lucide-react";
 import React, { useState, useEffect } from "react";
 
 import Button from "../Components/Button";
@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [visible, setVisible] = useState(false);
 
   const { login, error, isLoading, clearError } = useAuthStore();
   const navigate = useNavigate();
@@ -38,18 +39,30 @@ const Login = () => {
             Welcome Back
           </h2>
           <form>
-            <Input
-              icon={Mail}
-              type="email"
-              placeholder="Email address"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Input
-              icon={User}
-              type="password"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="relative mb-4">
+              <Input
+                icon={Mail}
+                type="email"
+                placeholder="Email address"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="relative mb-4">
+              <Input
+                icon={User}
+                type={visible ? "text" : "password"}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+
+              <div
+                // Clear password field on click
+                onClick={() => setVisible(!visible)}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-slate-400 font-bold"
+              >
+                {visible ? <EyeIcon /> : <EyeOffIcon />}
+              </div>
+            </div>
             {error && (
               <p className="text-red-500 font-semibold mt-2">{error}</p>
             )}
