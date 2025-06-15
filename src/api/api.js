@@ -2,9 +2,12 @@
 import axios from "axios";
 
 // Base URLs
-const BASE_API_URL = import.meta.env.MODE === "development"
+/*const BASE_API_URL = import.meta.env.MODE === "development"
   ? "http://localhost:7000/api"
-  : "https://auth-backend-api-ce94.onrender.com";
+  : "https://auth-backend-api-ce94.onrender.com";*/
+
+const BASE_API_URL = "https://auth-backend-api-ce94.onrender.com/api";
+
 
 // Individual endpoint groups
 const AUTH_URL = `${BASE_API_URL}/auth`;
