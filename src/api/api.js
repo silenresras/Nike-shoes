@@ -4,7 +4,7 @@ import axios from "axios";
 // Base URLs
 const BASE_API_URL = import.meta.env.MODE === "development"
   ? "http://localhost:7000/api"
-  : "https://auth-backend-api-ce94.onrender.com/api";
+  : "https://auth-backend-api-ce94.onrender.com";
 
 // Individual endpoint groups
 const AUTH_URL = `${BASE_API_URL}/auth`;
