@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
+import { auth_api } from "../../api/api";
 
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:7000/api/auth" : "https://auth-backend-api-ce94.onrender.com/api/auth";
 
 axios.defaults.withCredentials = true
 
@@ -16,7 +16,7 @@ export const useAuthStore = create((set) => ({
     signup: async (name, email, password) => {
         set({ error: null, isLoading: true });
         try {
-            const response = await axios.post(`${API_URL}/signup`, { name, email, password });
+            const response = await auth_api.post("/signup", { name, email, password });
             set({ user: response.data.user, isAuthenticated: true, isLoading: false })
 
             localStorage.setItem("authToken", response.data.token);
@@ -39,7 +39,7 @@ export const useAuthStore = create((set) => ({
     login: async (email, password) => {
         set({ error: null, isLoading: true })
         try {
-            const response = await axios.post(`${API_URL}/login`, { email, password }, { withCredentials: true });
+            const response = await auth_api.post("/login", { email, password }, { withCredentials: true });
             set({ user: response.data.user, isAuthenticated: true, isLoading: false })
 
             localStorage.setItem("authToken", response.data.token);
@@ -53,7 +53,7 @@ export const useAuthStore = create((set) => ({
         set({ isLoading: true, error: null })
 
         try {
-            await axios.post(`${API_URL}/logout`)
+            await auth_api.post("logout")
             set({ user: null, isAuthenticated: false, isLoading: false, error: null })
             localStorage.removeItem("authToken");
         } catch (error) {
@@ -65,7 +65,7 @@ export const useAuthStore = create((set) => ({
     verifyEmail: async (code) => {
         set({ error: null, isLoading: true })
         try {
-            const response = await axios.post(`${API_URL}/verify-email`, { code });
+            const response = await auth_api.post("/verify-email", { code });
             set((state) => ({
                 user: { ...state.user, isVerified: true }, // Set `isVerified` to true
                 message: response.data.message,
@@ -90,7 +90,7 @@ export const useAuthStore = create((set) => ({
 
         try {
             // Include the token in the request headers to authenticate the user
-            const response = await axios.get(`${API_URL}/check-auth`, {
+            const response = await auth_api.get("/check-auth", {
                 headers: { Authorization: `Bearer ${token}` },
                 withCredentials: true
             });
@@ -116,7 +116,7 @@ export const useAuthStore = create((set) => ({
         set({ error: null, isLoading: true })
 
         try {
-            const response = await axios.post(`${API_URL}/forgot-Password`, { email })
+            const response = await auth_api.post("/forgot-Password", { email })
             set({ message: response.data.message, isLoading: false })
         } catch (error) {
             set({ isLoading: false, error: error.response.data.message } || "Error sending reset password email")
@@ -128,7 +128,7 @@ export const useAuthStore = create((set) => ({
         set({ error: null, isLoading: true })
 
         try {
-            const response = await axios.post(`${API_URL}/reset-password/${token}`, { password })
+            const response = await auth_api.post("/reset-password/${token}", { password })
             set({ message: response.data.message, isLoading: false })
         } catch (error) {
             set({ isLoading: false, error: error.response.data.message || "Error resetting password" })
