@@ -83,6 +83,7 @@ export const useAuthStore = create((set) => ({
 
         const token = localStorage.getItem("authToken");  // Check localStorage for the token
         if (!token) {
+            console.log("No token found");
             set({ isCheckingAuth: false, isAuthenticated: false });
             return;
         }
@@ -95,7 +96,13 @@ export const useAuthStore = create((set) => ({
             });
 
             if (response.data.isAuthenticated) {
-                set({ isAuthenticated: true, user: response.data.user });
+                set({ isAuthenticated: true, user: response.data.user, isCheckingAuth: false, });
+            } else {
+                set({
+                    user: null,
+                    isAuthenticated: false,
+                    isCheckingAuth: false, // ✅ set to false
+                  });
             }
         } catch (error) {
             set({ error: null, isCheckingAuth: false, isAuthenticated: false });

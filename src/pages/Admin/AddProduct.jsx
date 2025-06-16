@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 import Button from "../../Components/Button";
-import Input from "../../Components/Input";
+import Input  from "../../Components/Input";
 import { product_api } from "../../api/api";
 
 const AddProduct = () => {
